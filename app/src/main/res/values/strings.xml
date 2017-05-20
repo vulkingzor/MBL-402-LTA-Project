@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">"Trail Expedition "</string>
+    <string name="view_trail_maps">View Trail Maps</string>
+    <string name="user_profile">User Profile</string>
+    <string name="view_global_map">View Global Map</string>
+    <string name="app_tagline">Start Your Hiking Adventure</string>
+    <string name="main_img_description">Eagle Falls, California</string>
+</resources>
