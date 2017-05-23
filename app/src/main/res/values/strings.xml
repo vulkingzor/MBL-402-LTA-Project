@@ -5,4 +5,19 @@
     <string name="view_global_map">View Global Map</string>
     <string name="app_tagline">Start Your Hiking Adventure</string>
     <string name="main_img_description">Eagle Falls, California</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_map">Trail Map</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="user_prof_first_name">First Name:</string>
+    <string name="user_prof_last_name">Last Name:</string>
+    <string name="user_prof_email">Email:</string>
+    <string name="user_prof_phone">Phone:</string>
+    <string name="user_prof_save_changes">Save Changes</string>
+    <string name="user_prof_cancel">Cancel</string>
+    <string name="menu_normal_view">Normal View</string>
+    <string name="menu_satellite_view">Satellite View</string>
+    <string name="menu_hybrid_view">Hybrid View</string>
+    <string name="location_label">Location:</string>
 </resources>

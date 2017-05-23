@@ -1,5 +1,6 @@
 package edu.phoenix.mbl402.LTA;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,7 +39,9 @@ public class MainMenu extends AppCompatActivity {
         userProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainMenu.this, "User Profile", Toast.LENGTH_SHORT).show();
+                Intent userProf = new Intent("edu.phoenix.mbl402.LTA.UserProfile");
+                startActivity(userProf);
+
             }
         });
     }

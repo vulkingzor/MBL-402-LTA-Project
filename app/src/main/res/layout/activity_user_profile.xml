@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="edu.phoenix.mbl402.LTA.UserProfile">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/userFstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:minWidth="@dimen/user_prof_tv_min"
+            android:padding="@dimen/user_prof_padding"
+            android:text="@string/user_prof_first_name"
+            android:textDirection="locale"
+            android:textSize="@dimen/user_prof_txt_size"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/userFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/userFstName"
+            android:layout_toEndOf="@id/userFstName"
+            android:inputType="textCapWords"
+            android:minWidth="@dimen/edit_text_min"
+            android:textSize="@dimen/user_prof_txt_size" />
+
+        <TextView
+            android:id="@+id/userLstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userFstName"
+            android:gravity="left"
+            android:minWidth="@dimen/user_prof_tv_min"
+            android:padding="@dimen/user_prof_padding"
+            android:text="@string/user_prof_last_name"
+            android:textDirection="locale"
+            android:textSize="@dimen/user_prof_txt_size"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/userLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/userLstName"
+            android:layout_toEndOf="@id/userFstName"
+            android:inputType="textCapWords"
+            android:minWidth="@dimen/edit_text_min"
+            android:textSize="@dimen/user_prof_txt_size" />
+
+        <TextView
+            android:id="@+id/userPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userLstName"
+            android:gravity="left"
+            android:minWidth="@dimen/user_prof_tv_min"
+            android:padding="@dimen/user_prof_padding"
+            android:text="@string/user_prof_phone"
+            android:textDirection="locale"
+            android:textSize="@dimen/user_prof_txt_size"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/userPhoneData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/userPhone"
+            android:layout_toEndOf="@id/userPhone"
+            android:inputType="textCapWords"
+            android:minWidth="@dimen/edit_text_min"
+            android:textSize="@dimen/user_prof_txt_size" />
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userPhone"
+            android:gravity="left"
+            android:minWidth="@dimen/user_prof_tv_min"
+            android:padding="@dimen/user_prof_padding"
+            android:text="@string/user_prof_email"
+            android:textDirection="locale"
+            android:textSize="@dimen/user_prof_txt_size"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/userEmailData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/userEmail"
+            android:layout_toEndOf="@id/userEmail"
+            android:inputType="textCapWords"
+            android:minWidth="@dimen/edit_text_min"
+            android:textSize="@dimen/user_prof_txt_size" />
+
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="45dp"
+            android:text="@string/user_prof_save_changes" />
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/buttonSave"
+            android:layout_marginStart="50dp"
+            android:layout_toEndOf="@+id/buttonSave"
+            android:text="@string/user_prof_cancel" />
+    </RelativeLayout>
+
+
+</LinearLayout>
