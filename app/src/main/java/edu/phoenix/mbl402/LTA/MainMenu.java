@@ -1,5 +1,6 @@
 package edu.phoenix.mbl402.LTA;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,7 +25,8 @@ public class MainMenu extends AppCompatActivity {
         globalMapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainMenu.this, "Global Map", Toast.LENGTH_SHORT).show();
+                Intent mapIntent = new Intent(MainMenu.this, MapActivity.class);
+                startActivity(mapIntent);
             }
         });
 
@@ -38,7 +40,8 @@ public class MainMenu extends AppCompatActivity {
         userProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainMenu.this, "User Profile", Toast.LENGTH_SHORT).show();
+                Intent userIntent = new Intent(MainMenu.this, UserProfile.class);
+                startActivity(userIntent);
             }
         });
     }
