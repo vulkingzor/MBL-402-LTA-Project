@@ -1,4 +1,4 @@
-package edu.phoenix.mbl402.LTA;
+package edu.phoenix.mbl402.LTA.Activities;
 
 // Creators: Learning Team A
 // Created Date: 5/21/2017
@@ -6,8 +6,9 @@ package edu.phoenix.mbl402.LTA;
 //      and shows nearby trails.
 
 import android.Manifest;
-import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -16,17 +17,11 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -44,8 +39,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import edu.phoenix.mbl402.LTA.Database.DatabaseManager;
+import edu.phoenix.mbl402.LTA.R;
+import edu.phoenix.mbl402.LTA.Models.Trail;
 
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
@@ -61,7 +61,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private Button zoomInBtn;
     private Button zoomOutBtn;
-    private PopupWindow popWindow;
+
+    // Database manager to check if data exists
+    DatabaseManager databaseManager;
+    Cursor cursor;
+
+    ArrayList<Trail> trailList;
+    ArrayList<Marker> trailMarks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,40 +103,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
-    // Creates an about page popup for the user's information
-    public void aboutPopup() {
-        try {
-            // Getting the layout inflater
-            LayoutInflater inflater = (LayoutInflater) MapActivity.this
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            // Getting the popup layout
-            View layout = inflater.inflate(R.layout.popup,
-                    (ViewGroup) findViewById(R.id.popup_element));
-
-            // creating the popup window params
-            popWindow = new PopupWindow(layout, LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT, true);
-
-            // Showing popup at the center
-            popWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
-
-            // Setting the text
-            TextView popText = (TextView) layout.findViewById(R.id.text_message);
-            popText.setText("This page is a map of your current location. The other markers are other trails logged");
-            Button cancelButton = (Button) layout.findViewById(R.id.button_cancel);
-            cancelButton.setOnClickListener(cancel_button_click_listener);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private View.OnClickListener cancel_button_click_listener = new View.OnClickListener() {
-        public void onClick(View v) {
-            popWindow.dismiss();
-        }
-    };
-
     // Creating the Option Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -159,7 +131,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
                 return true;
             case R.id.map_about:
-                aboutPopup();
+                Toast.makeText(MapActivity.this, "This page is a map of your current location. The other markers are other trails logged", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_home:
+                // Returns to Main Menu
+                Intent homeIntent = new Intent(MapActivity.this, MainMenu.class);
+                startActivity(homeIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -372,8 +349,54 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     // Method to read known trails and mark the map with markers
-    public void setupTrails(){
+    public void setupTrails() {
 
+        String TAG = "Log";
+
+        // Opening Database connection
+        databaseManager = new DatabaseManager(this);
+        databaseManager.open();
+        cursor = databaseManager.fetchTrails();
+
+        Trail trailModel;
+        trailList = new ArrayList<Trail>();
+
+        if (cursor.getCount() > 0) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                trailModel = new Trail();
+                trailModel.setTrailID(cursor.getString(0));
+                trailModel.setName(cursor.getString(1));
+                trailModel.setLatitude(Double.valueOf(cursor.getString(2)));
+                trailModel.setLongitude(Double.valueOf(cursor.getString(3)));
+                trailModel.setCity(cursor.getString(4));
+                trailModel.setState(cursor.getString(5));
+                trailModel.setCountry(cursor.getString(6));
+                trailModel.setZip(cursor.getString(7));
+                trailList.add(trailModel);
+                Log.i(TAG, "Logging: " + trailModel.getName());
+            }
+        }
+        cursor.close();
+        databaseManager.closeDB();
+
+        trailMarks = new ArrayList<Marker>();
+
+        for (int i = 0; i < trailList.size(); i++) {
+
+            // Getting the current location
+            LatLng latLng = new LatLng(trailList.get(i).getLatitude(),
+                    trailList.get(i).getLongitude());
+            // Sets the mark's info window to unknown
+            String trailInfo = trailList.get(i).getName();
+            String trailSnip = trailList.get(i).getCity() + " " + trailList.get(i).getState() + ", " + trailList.get(i).getZip() + ", " + trailList.get(i).getCountry() + " ";
+
+            trailMarks.add(mMap.addMarker(new MarkerOptions()
+                    .position(latLng).title(trailInfo)
+                    .snippet(trailSnip)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))));
+
+        }
     }
 
 

@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="edu.phoenix.mbl402.LTA.MapActivity">
+    tools:context="edu.phoenix.mbl402.LTA.Activities.MapActivity">
 
     <fragment
         android:id="@+id/map"

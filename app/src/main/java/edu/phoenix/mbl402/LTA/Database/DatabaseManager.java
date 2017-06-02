@@ -1,4 +1,4 @@
-package edu.phoenix.mbl402.LTA;
+package edu.phoenix.mbl402.LTA.Database;
 
 /**
  * Created by usyag on 5/29/2017.
@@ -9,6 +9,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import edu.phoenix.mbl402.LTA.Models.Trail;
 
 public class DatabaseManager {
 
@@ -38,53 +40,17 @@ public class DatabaseManager {
         helper.close();
     }
 
-    // Method to add customers
-    public void addUser(User user) {
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_FIRST, user.getFirstName());
-        values.put(DatabaseHelper.COLUMN_LAST, user.getLastName());
-        values.put(DatabaseHelper.COLUMN_EMAIL, user.getEmail());
-        values.put(DatabaseHelper.COLUMN_PHONE, user.getPhoneNumber());
-        database.insert(DatabaseHelper.TABLE_USERS, null, values);
-    }
-
-    // Method to fetch the database information
-    public Cursor fetchUsers() {
-        // Querying for all the data
-        Cursor cursor = database.query(DatabaseHelper.TABLE_USERS, DatabaseHelper.ALL_COLUMNS_USER, null, null, null, null, null);
-
-        if (cursor != null) {
-            cursor.moveToFirst();
-        }
-        return cursor;
-    }
-
-    // Method to update a user
-    public int updateUser(long _id, User user) {
-        ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_FIRST, user.getFirstName());
-        values.put(DatabaseHelper.COLUMN_LAST, user.getLastName());
-        values.put(DatabaseHelper.COLUMN_EMAIL, user.getEmail());
-        values.put(DatabaseHelper.COLUMN_PHONE, user.getPhoneNumber());
-        int i = database.update(DatabaseHelper.TABLE_USERS, values, DatabaseHelper.COLUMN_ID + " = " + _id, null);
-        return i;
-    }
-
-    // Method to delete a user
-    public void deleteUser(long _id) {
-        database.delete(DatabaseHelper.TABLE_USERS, DatabaseHelper.COLUMN_ID + "=" + _id, null);
-    }
-
     // Method to add trails
     public void addTrail(Trail trail) {
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_NAME, trail.getName());
         values.put(DatabaseHelper.COLUMN_LAT, trail.getLatitude());
         values.put(DatabaseHelper.COLUMN_LONG, trail.getLongitude());
         values.put(DatabaseHelper.COLUMN_CITY, trail.getCity());
         values.put(DatabaseHelper.COLUMN_STATE, trail.getState());
         values.put(DatabaseHelper.COLUMN_COUNTRY, trail.getCountry());
         values.put(DatabaseHelper.COLUMN_ZIP, trail.getZip());;
-        database.insert(DatabaseHelper.TABLE_USERS, null, values);
+        database.insert(DatabaseHelper.TABLE_TRAILS, null, values);
     }
 
     // Method to fetch the database information
@@ -99,8 +65,9 @@ public class DatabaseManager {
     }
 
     // Method to update a trail
-    public int updateUser(long _id, Trail trail) {
+    public int updateTrail(long _id, Trail trail) {
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_NAME, trail.getName());
         values.put(DatabaseHelper.COLUMN_LAT, trail.getLatitude());
         values.put(DatabaseHelper.COLUMN_LONG, trail.getLongitude());
         values.put(DatabaseHelper.COLUMN_CITY, trail.getCity());
@@ -115,6 +82,5 @@ public class DatabaseManager {
     public void deleteTrail(long _id) {
         database.delete(DatabaseHelper.TABLE_TRAILS, DatabaseHelper.COLUMN_ID + "=" + _id, null);
     }
-
 }
 

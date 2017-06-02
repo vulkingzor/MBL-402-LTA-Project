@@ -7,49 +7,56 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-
+    -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBdkgLCHMlWiTAhAP7nE3FwOcfvlc6eW84"/>
+            android:value="AIzaSyBdkgLCHMlWiTAhAP7nE3FwOcfvlc6eW84" />
 
-        <activity android:name=".MainMenu">
+        <activity android:name=".Activities.MainMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".UserProfile"
+            android:name=".Activities.UserProfile"
             android:label="@string/title_activity_user_profile"
-            android:parentActivityName=".MainMenu">
+            android:parentActivityName=".Activities.MainMenu">
             <intent-filter>
                 <action android:name="edu.phoenix.mbl402.LTA.UserProfile" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.phoenix.mbl402.LTA.MainMenu" />
+                android:value="edu.phoenix.mbl402.LTA.Activities.MainMenu" />
         </activity>
         <activity
-            android:name=".MapActivity"
+            android:name=".Activities.MapActivity"
             android:label="@string/title_activity_map"
-            android:parentActivityName=".MainMenu">
+            android:parentActivityName=".Activities.MainMenu">
             <intent-filter>
                 <action android:name="edu.phoenix.mbl402.LTA.MapActivity" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-    </application>-->
+        <activity
+            android:name=".Activities.TrailList"
+            android:label="@string/title_activity_trail_list"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".Activities.ViewTrail" />
+        <activity android:name=".Activities.AddTrail"></activity>
+    </application>
+
 </manifest>

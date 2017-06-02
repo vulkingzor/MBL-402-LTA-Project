@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.phoenix.mbl402.LTA.UserProfile">
+    tools:context="edu.phoenix.mbl402.LTA.Activities.UserProfile">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:id="@+id/userFstName"
+            android:id="@+id/text_firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
@@ -27,20 +27,20 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/userFirstName"
+            android:id="@+id/edit_firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/userFstName"
-            android:layout_toEndOf="@id/userFstName"
+            android:layout_alignBaseline="@id/text_firstname"
+            android:layout_toEndOf="@id/text_firstname"
             android:inputType="textCapWords"
             android:minWidth="@dimen/edit_text_min"
             android:textSize="@dimen/user_prof_txt_size" />
 
         <TextView
-            android:id="@+id/userLstName"
+            android:id="@+id/text_lastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/userFstName"
+            android:layout_below="@id/text_firstname"
             android:gravity="left"
             android:minWidth="@dimen/user_prof_tv_min"
             android:padding="@dimen/user_prof_padding"
@@ -50,20 +50,20 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/userLastName"
+            android:id="@+id/edit_lastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/userLstName"
-            android:layout_toEndOf="@id/userFstName"
+            android:layout_alignBaseline="@id/text_lastname"
+            android:layout_toEndOf="@id/text_firstname"
             android:inputType="textCapWords"
             android:minWidth="@dimen/edit_text_min"
             android:textSize="@dimen/user_prof_txt_size" />
 
         <TextView
-            android:id="@+id/userPhone"
+            android:id="@+id/text_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/userLstName"
+            android:layout_below="@id/text_lastname"
             android:gravity="left"
             android:minWidth="@dimen/user_prof_tv_min"
             android:padding="@dimen/user_prof_padding"
@@ -73,20 +73,20 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/userPhoneData"
+            android:id="@+id/edit_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/userPhone"
-            android:layout_toEndOf="@id/userPhone"
-            android:inputType="textCapWords"
+            android:layout_alignBaseline="@id/text_phone"
+            android:layout_toEndOf="@id/text_phone"
+            android:inputType="phone"
             android:minWidth="@dimen/edit_text_min"
             android:textSize="@dimen/user_prof_txt_size" />
 
         <TextView
-            android:id="@+id/userEmail"
+            android:id="@+id/text_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/userPhone"
+            android:layout_below="@id/text_phone"
             android:gravity="left"
             android:minWidth="@dimen/user_prof_tv_min"
             android:padding="@dimen/user_prof_padding"
@@ -96,33 +96,47 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/userEmailData"
+            android:id="@+id/edit_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/userEmail"
-            android:layout_toEndOf="@id/userEmail"
+            android:layout_alignBaseline="@id/text_email"
+            android:layout_toEndOf="@id/text_email"
             android:inputType="textCapWords"
             android:minWidth="@dimen/edit_text_min"
             android:textSize="@dimen/user_prof_txt_size" />
-
-
-        <Button
-            android:id="@+id/buttonSave"
+        <LinearLayout
+            android:id="@+id/layout_buttons"
+            android:layout_below="@+id/edit_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_marginStart="45dp"
-            android:text="@string/user_prof_save_changes" />
+            >
 
-        <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/buttonSave"
-            android:layout_marginStart="50dp"
-            android:layout_toEndOf="@+id/buttonSave"
-            android:text="@string/user_prof_cancel" />
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Save"
+                android:layout_gravity="left"/>
+
+            <Button
+                android:id="@+id/button_clear"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="Clear" />
+
+            <Button
+                android:id="@+id/button_cancel"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="@string/user_prof_cancel"
+                android:layout_marginRight="5dp"/>
+
+
+        </LinearLayout>
+
+
+
     </RelativeLayout>
 
 

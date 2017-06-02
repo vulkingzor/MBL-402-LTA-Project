@@ -25,4 +25,7 @@
         android:id="@+id/map_about"
         android:title="@string/about"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/title_home" />
 </menu>
