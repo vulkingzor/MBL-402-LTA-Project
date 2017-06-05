@@ -1,5 +1,9 @@
 package edu.phoenix.mbl402.LTA.Activities;
 
+// Creators: Learning Team A
+// Created Date: 5/21/2017
+// Class Description: Activity to have the user input their information for preferences
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +21,7 @@ import edu.phoenix.mbl402.LTA.R;
 
 public class UserProfile extends AppCompatActivity {
 
+    // UI elements
     Button saveBtn;
     Button cancelBtn;
     Button clearBtn;

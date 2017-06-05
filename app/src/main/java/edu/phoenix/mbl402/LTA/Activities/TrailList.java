@@ -1,5 +1,9 @@
 package edu.phoenix.mbl402.LTA.Activities;
 
+// Creators: Learning Team A
+// Created Date: 5/21/2017
+// Class Description: Activity to show all the trails in the database
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;

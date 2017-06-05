@@ -1,17 +1,18 @@
 package edu.phoenix.mbl402.LTA.Activities;
 
+// Creators: Learning Team A
+// Created Date: 5/21/2017
+// Class Description: Activity to Add trails to the database
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.GoogleMap;
 
 import edu.phoenix.mbl402.LTA.Database.DatabaseManager;
 import edu.phoenix.mbl402.LTA.Models.Trail;
@@ -35,6 +36,7 @@ public class AddTrail extends AppCompatActivity {
     // Database manager for access to DB methods
     private DatabaseManager databaseManager;
 
+    // Numerical values for longitude and latitude
     private double latNum;
     private double longNum;
 
@@ -74,30 +76,44 @@ public class AddTrail extends AppCompatActivity {
                 final String zip = zipET.getText().toString();
 
                 try{
+                    // Attempting to Parse the Numbers
                     longNum = Double.parseDouble(longitude);
                     latNum = Double.parseDouble(latitude);
 
+                    // Checking if Lat/Long valid, then checking if other entries are completed
+                    if(longNum >= -180 && longNum <= 180 && latNum >= -90 && latNum <= 90){
+                        if (name.length()>0 && latitude.length()>0 && longitude.length()>0&&
+                                city.length()>0 && state.length()>0 && country.length()>0&&
+                                zip.length()>4) {
 
-                    if (name.length()>0 && latitude.length()>0 && longitude.length()>0&&
-                            city.length()>0 && state.length()>0 && country.length()>0&&
-                            zip.length()>4) {
-                        Trail newTrail = new Trail(name, latNum, longNum, city, state, country, zip);
-                        databaseManager.addTrail(newTrail);
+                            // Creating a new trail
+                            Trail newTrail = new Trail(name, latNum, longNum, city, state, country, zip);
+                            databaseManager.addTrail(newTrail);
 
-                        Intent main = new Intent(AddTrail.this, TrailList.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(main);
-                    }else {
+                            // Going back to the list
+                            Intent main = new Intent(AddTrail.this, TrailList.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(main);
+                        }else {
+                            // Error message if not complete
+                            Toast.makeText(AddTrail.this,
+                                    "Please enter values for each field",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Error if lat/long incorrect
                         Toast.makeText(AddTrail.this,
-                                "Please enter values for each field",
+                                "Please Enter a Valid Longitude (-180 to 180) and Latitude (-90 to 90)",
                                 Toast.LENGTH_SHORT).show();
                     }
+                    // Handling if the Number Parse fails
                 }catch (Exception e){
                     Toast.makeText(AddTrail.this, "Please enter Numerical Values for Longitude and Latitude", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+        // Returns to List
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -10,18 +10,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/label_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Trail ID" />
-
-        <TextView
-            android:id="@+id/txt_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ID" />
-
-        <TextView
             android:id="@+id/label_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +37,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter Trail Latitude"
-            android:inputType="numberDecimal">
+            android:inputType="numberDecimal|numberSigned">
 
         </EditText>
 
@@ -65,7 +53,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Enter Trail Longitude"
-            android:inputType="numberDecimal">
+            android:inputType="numberDecimal|numberSigned">
 
         </EditText>
 

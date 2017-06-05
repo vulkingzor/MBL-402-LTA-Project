@@ -1,5 +1,10 @@
 package edu.phoenix.mbl402.LTA.Activities;
 
+// Creators: Learning Team A
+// Created Date: 5/21/2017
+// Class Description: Activity to view a specific trails. Has a Google Map inlay so the user can
+//      see the general location
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -133,19 +138,24 @@ public class ViewTrail extends AppCompatActivity implements OnMapReadyCallback{
                     longNum = Double.parseDouble(longitude);
                     latNum = Double.parseDouble(latitude);
 
+                    if(longNum >= -180 && longNum <= 180 && latNum >= -90 && latNum <= 90) {
+                        if (name.length() > 0 && latitude.length() > 0 && longitude.length() > 0 &&
+                                city.length() > 0 && state.length() > 0 && country.length() > 0 &&
+                                zip.length() > 4) {
+                            Trail updatedTrail = new Trail(name, latNum, longNum, city, state, country, zip);
+                            databaseManager.updateTrail(_id, updatedTrail);
 
-                    if (name.length()>0 && latitude.length()>0 && longitude.length()>0&&
-                            city.length()>0 && state.length()>0 && country.length()>0&&
-                            zip.length()>4) {
-                        Trail updatedTrail = new Trail(name, latNum, longNum, city, state, country, zip);
-                        databaseManager.updateTrail(_id, updatedTrail);
-
-                        Intent main = new Intent(ViewTrail.this, TrailList.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(main);
-                    }else {
+                            Intent main = new Intent(ViewTrail.this, TrailList.class)
+                                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(main);
+                        } else {
+                            Toast.makeText(ViewTrail.this,
+                                    "Please enter values for each field",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
                         Toast.makeText(ViewTrail.this,
-                                "Please enter values for each field",
+                                "Please Enter a Valid Longitude (-180 to 180) and Latitude (-90 to 90)",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }catch (Exception e){
@@ -192,7 +202,7 @@ public class ViewTrail extends AppCompatActivity implements OnMapReadyCallback{
 
         // Move map camera
         trailMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        trailMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        trailMap.animateCamera(CameraUpdateFactory.zoomTo(8));
 
     }
 

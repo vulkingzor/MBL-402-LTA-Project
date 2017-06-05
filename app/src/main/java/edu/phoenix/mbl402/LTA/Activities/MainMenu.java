@@ -1,5 +1,9 @@
 package edu.phoenix.mbl402.LTA.Activities;
 
+// Creators: Learning Team A
+// Created Date: 5/21/2017
+// Class Description: Main menu Activity, uses the users preferences. Hub for other activities
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -39,15 +43,11 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        // Opening Database connection
+        // Opening Database connection to create database then closing
         databaseManager = new DatabaseManager(this);
         databaseManager.open();
-        cursor = databaseManager.fetchTrails();
+        databaseManager.closeDB();
 
-        // Checking if any data exists
-        if(cursor.getCount() == 0){
-            seedDatabase();
-        }
 
         // Setting up the UI elements
         titleTV = (TextView)findViewById(R.id.txtMainTagline);
@@ -91,11 +91,4 @@ public class MainMenu extends AppCompatActivity {
         });
     }
 
-    // Seeds some initial data if the database is empty
-    public void seedDatabase() {
-        Trail trail1 = new Trail("Mount Diablo Statepark", 37.8817, -121.9141, "Clayton", "California", "United States of America", "94517");
-        Trail trail2 = new Trail("Yosemite National Park", 37.85, -119.56667, "Yosemite", "California", "United States of America", "95389");
-        databaseManager.addTrail(trail1);
-        databaseManager.addTrail(trail2);
-    }
 }

@@ -361,6 +361,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Trail trailModel;
         trailList = new ArrayList<Trail>();
 
+        // If information found adds the trail to a list
         if (cursor.getCount() > 0) {
             for (int i = 0; i < cursor.getCount(); i++) {
                 cursor.moveToPosition(i);
@@ -377,11 +378,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Log.i(TAG, "Logging: " + trailModel.getName());
             }
         }
+        // Closing Database
         cursor.close();
         databaseManager.closeDB();
 
         trailMarks = new ArrayList<Marker>();
 
+        // Creating the markers
         for (int i = 0; i < trailList.size(); i++) {
 
             // Getting the current location
